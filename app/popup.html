@@ -11,9 +11,16 @@
     <!-- endbuild -->
   </head>
   <body>
-    <a href="https://github.com/login/oauth/authorize?scope=gist&client_id=" class="btn" id="link"><span class="github"></span>Link Github</a>
+    <a href="https://github.com/login/oauth/authorize?scope=gist&client_id=" class="btn hide" id="link">Link Github</a>
     <span class="btn hide" id="info">Have Fun!</span>
     <div id="username"></div>
+    <div class="spinner" id="loading">
+      <div class="rect1"></div>
+      <div class="rect2"></div>
+      <div class="rect3"></div>
+      <div class="rect4"></div>
+      <div class="rect5"></div>
+    </div>
     <!-- build:js scripts/popup-vendor.js -->
     <!-- bower:js -->
     <!-- endbower -->

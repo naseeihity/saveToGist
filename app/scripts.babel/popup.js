@@ -4,6 +4,7 @@ const CRIED_ID = '79b284688b1aa407d535';
 var link = document.getElementById('link');
 var info = document.getElementById('info');
 var username = document.getElementById('username');
+var loading = document.getElementById('loading');
 link.addEventListener('click', linkGithub);
 
 function linkGithub(e) {
@@ -26,10 +27,12 @@ function domChange(usertoken) {
     var resultObj = JSON.parse(result);
     var user_name = resultObj.name || '';
     if (user_name !== '') {
-      link.classList.add('hide');
       info.classList.remove('hide');
       username.innerHTML = user_name;
+    } else {
+      link.classList.remove('hide');
     }
+    loading.classList.add('hide');
   });
 }
 
