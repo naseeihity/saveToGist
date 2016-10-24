@@ -1,6 +1,6 @@
 'use strict';
 
-var hiddentoken = document.getElementById("hidden");
+var hiddentoken = document.getElementById('hidden');
 var token = hiddentoken.dataset.key;
 if(token) {
   sendToBackground(token);
@@ -11,7 +11,7 @@ function sendToBackground(token) {
     if (res === 'Success'){
       window.close();
     } else {
-      console.log("Something wrong!");
+      console.log('Something wrong!');
     }
   })
 }

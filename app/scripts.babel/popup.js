@@ -28,9 +28,11 @@ function domChange(usertoken) {
     var user_name = resultObj.name || '';
     if (user_name !== '') {
       info.classList.remove('hide');
+      link.classList.add('hide');
       username.innerHTML = user_name;
     } else {
       link.classList.remove('hide');
+      info.classList.add('hide');
     }
     loading.classList.add('hide');
   });
@@ -57,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function ajax(url, callback) {
   var xhr = new XMLHttpRequest();
-  xhr.open("GET", url, true);
+  xhr.open('GET', url, true);
   xhr.send();
   xhr.onreadystatechange = () =>{
     if (xhr.readyState === 4) {
