@@ -23,7 +23,8 @@
     "clipboardRead",
     "clipboardWrite",
     "contentSettings",
-    "contextMenus"
+    "contextMenus",
+    "storage"
   ],
   "options_ui": {
     "page": "options.html",
@@ -37,6 +38,16 @@
       ],
       "js": [
         "scripts/contentscript.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches":[
+        "https://gisttest.herokuapp.com/callback/*"
+      ],
+      "js": [
+        "scripts/token_content.js"
       ],
       "run_at": "document_end",
       "all_frames": false

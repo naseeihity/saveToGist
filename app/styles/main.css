@@ -2,7 +2,7 @@ body {
   padding: 20px;
 }
 
-a.btn{
+.btn{
   text-decoration: none;
   color: #fff;
   display: block;
@@ -18,6 +18,17 @@ a.btn{
   text-align: center;
 }
 
-a .github{
+.hide{
+  display: none;
+}
 
+a.info{
+  background-color: #61FF69;
+}
+
+#username {
+  text-align: center;
+  font-size: 16px;
+  color: #E87E51;
+  padding: 5px;
 }
