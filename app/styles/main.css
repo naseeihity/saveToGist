@@ -1,0 +1,23 @@
+body {
+  padding: 20px;
+}
+
+a.btn{
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  width: 100px;
+  height: 30px;
+  background-color: #727272;
+  border-radius: 2px;
+  font-size: 16px;
+  line-height: 2;
+  font-weight: bolder;
+  -ms-text-overflow: ;
+  white-space: nowrap;
+  text-align: center;
+}
+
+a .github{
+
+}
