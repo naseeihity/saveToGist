@@ -22,7 +22,48 @@ function getSelectionMessage(message, sender, sendResponse){
 
 function showModal(gist, token) {
   // 弹框输入 description,public,filename
-  sendToGist(gist, token);
+  const modal = $(`<div class="gistModal">
+      <div class="gistModal_content">
+        <form action="" class="gistModal_form">
+          <input
+            type="text"
+            id="gist_filename"
+            class="gist_filename"
+            name="gist_filename"
+            placeholder="Filename including extension..."
+          />
+          <textarea rows="2"
+            type="text"
+            id="gist_description"
+            class="gist_description"
+            name="gist_description"
+            placeholder="Gist description..."
+          />
+          <div class="flexbox">
+            <label>
+              <input
+                type="checkbox"
+                id="gist_public"
+                class="gist_public"
+                name="gist_public"
+                checked
+              />
+              public
+            </label>
+            <button class="btnDone">
+              Done!
+            </button>
+          </div>
+        </form>
+        <p class="infotips">If you leave it blank, we will use default values.</p>
+        <span class="closeBtn">X</span>
+      </div>
+    </div>`);
+    $('body').append(modal);
+    $("form.gistModal_form").submit(function(e){
+      e.preventDefault();
+    });
+  // sendToGist(gist, token);
 }
 
 function showSuccessModal() {

@@ -40,6 +40,9 @@
         "scripts/jquery.min.js",
         "scripts/contentscript.js"
       ],
+      "css": [
+        "styles/modal.css"
+      ],
       "run_at": "document_end",
       "all_frames": false
     },

@@ -13,7 +13,6 @@ chrome.runtime.onInstalled.addListener(details => {
     if (info.menuItemId === 'main') {
       const text = info.selectionText;
       const tabId = tab.id;
-
       if (text) {
         chrome.tabs.sendMessage(tabId,{text: text,tab: tab},(res) => {
           console.log(res.message);

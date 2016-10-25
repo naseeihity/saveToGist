@@ -16,7 +16,41 @@
     <!-- bower:js -->
     <!-- endbower -->
     <!-- endbuild -->
-
+<div class="gistModal">
+      <div class="gistModal_content">
+        <form action="" class="gitsModal_form">
+          <input
+            type="text"
+            id="gist_filename"
+            class="gist_filename"
+            name="gist_filename"
+            placeholder="Filename including extension..."
+          />
+          <input
+            type="text"
+            id="gist_description"
+            class="gist_description"
+            name="gist_description"
+            placeholder="Gist description..."
+          />
+          <div class="flexbox">
+            <label>
+              <input
+                type="checkbox"
+                id="gist_public"
+                class="gist_public"
+                name="gist_public"
+                checked
+              />
+              public
+            </label>
+            <button>
+              Done!
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
     <!-- build:js scripts/options.js -->
     <script src="scripts/options.js"></script>
     <!-- endbuild -->
