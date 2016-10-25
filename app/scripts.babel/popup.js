@@ -38,15 +38,23 @@ function domChange(usertoken) {
   });
 }
 
+function initDom() {
+  loading.classList.add('hide');
+  link.classList.remove('hide');
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   chrome.storage.sync.get('savetogistToken', (result) => {
+      !result.savetogistToken && initDom();
+      console.log(result.savetogistToken);
       result.savetogistToken && domChange(result.savetogistToken);
   });
 
   chrome.runtime.onMessage.addListener(function(message, sender, sendResponse){
-    if (message.token !== '') {
+    if (message.token && message.token !== '') {
       sendResponse('Success');
       const token = message.token;
+      console.log(token);
       chrome.storage.sync.set({'savetogistToken': token}, function() {
           domChange(token);
       });
@@ -63,7 +71,11 @@ function ajax(url, callback) {
   xhr.send();
   xhr.onreadystatechange = () =>{
     if (xhr.readyState === 4) {
-      callback(xhr.responseText);
+      if (xhr.status === 200) {
+        callback(xhr.responseText);
+      } else {
+        console.log(xhr.status);
+      }
     }
   }
 }

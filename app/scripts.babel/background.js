@@ -9,8 +9,19 @@ chrome.runtime.onInstalled.addListener(details => {
   });
 
   chrome.contextMenus.onClicked.addListener((info, tab) => {
-    alert(info.selectionText);
-  })
+
+    if (info.menuItemId === 'main') {
+      const text = info.selectionText;
+      const tabId = tab.id;
+
+      if (text) {
+        chrome.tabs.sendMessage(tabId,{text: text,tab: tab},(res) => {
+          console.log(res.message);
+        });
+      }
+    }
+
+  });
+
 });
 
-console.log('\'Allo \'Allo! Event Page for Browser Action');

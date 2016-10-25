@@ -13,5 +13,5 @@ function sendToBackground(token) {
     } else {
       console.log('Something wrong!');
     }
-  })
+  });
 }
