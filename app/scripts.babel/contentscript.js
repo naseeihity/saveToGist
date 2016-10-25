@@ -9,9 +9,9 @@ ${message.tab.url}
   let gist = {
     description: 'a description of this gist',
     public: true,
-    "files": {
-      "aGist": {
-        "content": message.text + copyFrom
+    'files': {
+      'aGist': {
+        'content': message.text + copyFrom
       }
     }
   };
@@ -66,7 +66,7 @@ function showModal(gist, token) {
   // 弹出编辑弹框
     $('body').append(modal);
   // 处理保存请求
-    $("form.gistModal_form").submit(function(e){
+    $('form.gistModal_form').submit(function(e){
       e.preventDefault();
       $('.btnDone').prop('disabled', true);
       let gistUrl;
@@ -78,8 +78,8 @@ function showModal(gist, token) {
       gist.description = description || gist.description;
       gist.public = isPublic;
       if(filename) {
-        gist.files[filename] = gist.files["aGist"];
-        delete gist.files["aGist"];
+        gist.files[filename] = gist.files['aGist'];
+        delete gist.files['aGist'];
       }
       sendToGist(gist, token, (result) => {
         gistUrl = result;
@@ -99,7 +99,7 @@ function closeModal() {
 }
 
 function sendToGist(gist, token, callback) {
-  const URL = `https://api.github.com/gists`;
+  const URL = 'https://api.github.com/gists';
   const tokenHeader = `token ${token}`;
   const data = JSON.stringify(gist);
   let gistUrl = '';

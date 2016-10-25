@@ -1,10 +1,10 @@
 {
   "appName": {
-    "message": "sendToGist",
+    "message": "saveToGist",
     "description": "The name of the application"
   },
   "appDescription": {
-    "message": "My Chrome Extension",
+    "message": "Save code or article to your Github Gist quickly.",
     "description": "The description of the application"
   }
 }

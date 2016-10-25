@@ -46,7 +46,6 @@ function initDom() {
 document.addEventListener('DOMContentLoaded', () => {
   chrome.storage.sync.get('savetogistToken', (result) => {
       !result.savetogistToken && initDom();
-      console.log(result.savetogistToken);
       result.savetogistToken && domChange(result.savetogistToken);
   });
 
@@ -54,7 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (message.token && message.token !== '') {
       sendResponse('Success');
       const token = message.token;
-      console.log(token);
       chrome.storage.sync.set({'savetogistToken': token}, function() {
           domChange(token);
       });
