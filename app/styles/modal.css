@@ -72,6 +72,10 @@
     -webkit-appearance: none;
 }
 
+.gistModal_form > input:focus, .gistModal_form > textarea:focus {
+  border-color: #333 !important;
+}
+
 .gistModal_form > input, .gistModal_form > textarea {
   width: 100%;
   margin: 5px 10px;
