@@ -19,6 +19,30 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 
 });
 
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    const type = message.type;
+    if (type === 'Send token') {
+      const token = message.token;
+      if (token && token !== '') {
+        // 将token存入chrome.storage
+        chrome.storage.sync.set({'savetogistToken': token}, () => {
+          console.log("get token");
+        });
+        // 调用回调函数传回成功信息
+        sendResponse({
+          content: 'Success',
+          type: 'Get token'
+        });
+      } else {
+        sendResponse({
+          content: 'Error',
+          type: 'Get Error'
+        });
+      }
+    }
+
+  });
+
 function sendSelectedTxt(info, tab) {
   const text = info.selectionText;
   const tabId = tab.id;
