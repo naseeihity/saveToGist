@@ -146,7 +146,7 @@ function closeModal() {
   loader.removeClass('show');
   $('#gist_filename').val('');
   $('#gist_description').val('');
-  $('#gist_public').prop('checked');
+  $('#gist_public').prop('checked', true);
   $('.btnDone').prop('disabled', false);
   modal.remove();
 }
