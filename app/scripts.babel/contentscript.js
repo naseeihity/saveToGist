@@ -1,12 +1,15 @@
 'use strict';
 
+// 获取右键菜单传来的值的函数
 function getSelectionMessage(message, sender, sendResponse){
-  console.log(message,'content');
+  // 插入gist来自哪里的信息
+  // TODO: 可以定制,可以选择是否添加
   const copyFrom = `
 
 ---------------------------F--R--O--M------------------------------
 ${message.tab.url}
 -------------------------------------------------------------------`;
+  // gist内容的信息,与github gist的api已知
   let gist = {
     description: 'a description of this gist',
     public: true,
@@ -17,16 +20,19 @@ ${message.tab.url}
     }
   };
 
+  // 拿到token
   chrome.storage.sync.get('savetogistToken', (result) => {
-      let token = result.savetogistToken;
+      const token = result.savetogistToken;
+      // 展示模态框,供用户修改相关信息
       showModal(gist, token);
   });
 
+  // 成功的回调
   sendResponse({message:'Success!'});
 }
 
-function showModal(gist, token) {
-  // 弹框输入 description,public,filename
+function createModal() {
+  // 使用ES6的模板字符串创建弹窗界面
   const modal = $(`<div class="gistModal" id="gistModal">
       <div class="gistModal_content">
         <form action="" class="gistModal_form" id="gistModal_form" name="gistModal_form">
@@ -70,53 +76,83 @@ function showModal(gist, token) {
         </div>
       </div>
     </div>`);
-  // 弹出编辑弹框
-    $('body').append(modal);
-  // 处理保存请求
-    $('form.gistModal_form').submit(function(e){
-      e.preventDefault();
-      $('.btnDone').prop('disabled', true);
-      let gistUrl;
-      //取到修改的值
-      const filename = $('#gist_filename').val().trim();
-      const description = $('#gist_description').val().trim();
-      const isPublic = $('#gist_public').prop('checked');
 
-      gist.description = description || gist.description;
-      gist.public = isPublic;
-      if(filename) {
-        gist.files[filename] = gist.files['aGist'];
-        delete gist.files['aGist'];
-      }
-      showLoader();
-      sendToGist(gist, token, (result) => {
-        gistUrl = result;
-        closeModal();
-      });
-    });
-
-    $('#closeBtn').on('click', function(event) {
-      event.preventDefault();
-      closeModal();
-    });
+  return modal;
 }
 
+// 单例化创建弹出过程
+function getSingle(fn) {
+  let result;
+  return () => {
+    return result || (result = fn.apply(this, arguments));
+  };
+}
+var createSingleModal = getSingle(createModal);
+
+function showModal(gist, token) {
+  // 创建并插入弹框
+  const modal = createSingleModal();
+  $('body').append(modal);
+  // 处理保存请求
+  $('form.gistModal_form').submit(function(e){
+    e.preventDefault();
+    // 使按钮不可重复点击
+    $('.btnDone').prop('disabled', true);
+    // 得到生成的gist的url
+    // TODO: 以后可以用来展示
+    let gistUrl;
+    //取到修改的值
+    const filename = $('#gist_filename').val().trim(),
+          description = $('#gist_description').val().trim(),
+          isPublic = $('#gist_public').prop('checked');
+    // 更新gist的值
+    gist.description = description || gist.description;
+    gist.public = isPublic;
+    if(filename) {
+      gist.files[filename] = gist.files['aGist'];
+      delete gist.files['aGist'];
+    }
+    // 发送中显示loading动画
+    showLoader();
+    // 发送到接口
+    sendToGist(gist, token, (result) => {
+      if (result === '') {
+        console.log('send failed');
+      } else {
+        gistUrl = result;
+      }
+      // 关闭弹窗
+      closeModal();
+    });
+  });
+
+  // 关闭按钮的事件注册
+  $('#closeBtn').on('click', function(event) {
+    event.preventDefault();
+    closeModal();
+  });
+}
+
+// 显示loading
 function showLoader() {
   const loader = $('#modal_loader');
   loader.addClass('show');
 }
 
+// 关闭弹窗
 function closeModal() {
   const modal = $('#gistModal');
   modal.remove();
 }
 
+// 发送gist到接口
 function sendToGist(gist, token, callback) {
   const URL = 'https://api.github.com/gists';
   const tokenHeader = `token ${token}`;
+  // 将js对象转为json字符串
   const data = JSON.stringify(gist);
   let gistUrl = '';
-
+  // 注意将token放在header里
   $.ajax({
     url: URL,
     type: 'POST',
@@ -129,9 +165,10 @@ function sendToGist(gist, token, callback) {
       callback(gistUrl);
     },
     error: (err) => {
-      console.log(err);
+      callback(gistUrl);
     }
   });
 }
 
+// 注册事件监听,获取通过邮件菜单传来的值
 chrome.runtime.onMessage.addListener(getSelectionMessage);

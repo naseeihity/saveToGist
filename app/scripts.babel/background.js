@@ -12,7 +12,7 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
-
+  // 右键菜单发送选中文本到content_script
   if (info.menuItemId === 'saveToGist') {
     sendSelectedTxt(info, tab);
   }

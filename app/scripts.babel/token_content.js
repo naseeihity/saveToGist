@@ -1,17 +1,18 @@
 'use strict';
 
+// get token
 var hiddentoken = document.getElementById('hidden');
 var token = hiddentoken.dataset.key;
 if(token) {
-  sendToBackground(token);
+  sendToStorage(token);
 }
 
-function sendToBackground(token) {
-  chrome.runtime.sendMessage({token: token}, function(res){
-    if (res === 'Success'){
+function sendToStorage(token) {
+  chrome.runtime.sendMessage({token: token, type:'Send token'}, (res) => {
+    if (res.content === 'Success'){
       window.close();
     } else {
-      console.log('Something wrong!');
+      alert('Link Failed!');
     }
   });
 }
