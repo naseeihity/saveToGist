@@ -17,12 +17,6 @@
   },
   "permissions": [
     "tabs",
-    "http://*/*",
-    "https://*/*",
-    "background",
-    "clipboardRead",
-    "clipboardWrite",
-    "contentSettings",
     "contextMenus",
     "storage"
   ],

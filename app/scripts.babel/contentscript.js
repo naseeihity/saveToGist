@@ -94,7 +94,7 @@ function showModal(gist, token) {
   const modal = createSingleModal();
   $('body').append(modal);
   // 处理保存请求
-  $('form.gistModal_form').submit(function(e){
+  $('form.gistModal_form').on('submit', (e) => {
     e.preventDefault();
     // 使按钮不可重复点击
     $('.btnDone').prop('disabled', true);
@@ -142,6 +142,12 @@ function showLoader() {
 // 关闭弹窗
 function closeModal() {
   const modal = $('#gistModal');
+  const loader = $('#modal_loader');
+  loader.removeClass('show');
+  $('#gist_filename').val('');
+  $('#gist_description').val('');
+  $('#gist_public').prop('checked');
+  $('.btnDone').prop('disabled', false);
   modal.remove();
 }
 
