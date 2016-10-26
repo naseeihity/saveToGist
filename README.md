@@ -8,15 +8,15 @@ A chrome extension to save code to github gist quickly.
 ## UI & Usage
 
 #### Link to Github first:
-**before link**![](./img/readme1.png)  **after link** ![](./img/readme2.png)
+**before link**![](./img/readme1.PNG)  **after link** ![](./img/readme2.PNG)
 
 #### 选中文字后从右键菜单中调用
-![](./img/readme3.png)
-![](./img/readme4.png)
+![](./img/readme3.PNG)
+![](./img/readme4.PNG)
 你可以在这里修改`文件名`,`文件描述`,`是否public`
 
 #### 点击DONE!
-![](./img/readme5.png)
+![](./img/readme5.PNG)
 经过一个短暂的CSS loading动画,选中的内容就被保存到[Github Gist](https://gist.github.com/)了.
 
 ## Run as a Developer
