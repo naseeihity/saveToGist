@@ -1,6 +1,7 @@
 'use strict';
 
 function getSelectionMessage(message, sender, sendResponse){
+  console.log(message,'content');
   const copyFrom = `
 
 ---------------------------F--R--O--M------------------------------
@@ -44,7 +45,7 @@ function showModal(gist, token) {
             placeholder="Gist description..."
           />
           <div class="flexbox">
-            <label>
+            <label class="gist_public_label">
               <input
                 type="checkbox"
                 id="gist_public"
@@ -61,6 +62,12 @@ function showModal(gist, token) {
         </form>
         <p class="infotips">If you leave it blank, we will use default values.</p>
         <span class="closeBtn" id="closeBtn">X</span>
+        <div class="modal_loader" id="modal_loader">
+          <div class="modal_spinner">
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
+          </div>
+        </div>
       </div>
     </div>`);
   // 弹出编辑弹框
@@ -81,6 +88,7 @@ function showModal(gist, token) {
         gist.files[filename] = gist.files['aGist'];
         delete gist.files['aGist'];
       }
+      showLoader();
       sendToGist(gist, token, (result) => {
         gistUrl = result;
         closeModal();
@@ -91,6 +99,11 @@ function showModal(gist, token) {
       event.preventDefault();
       closeModal();
     });
+}
+
+function showLoader() {
+  const loader = $('#modal_loader');
+  loader.addClass('show');
 }
 
 function closeModal() {
