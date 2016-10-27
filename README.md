@@ -48,3 +48,6 @@ $ gulp build
 
 ## Author
 [Coaco](http://www.gaococ.com/)
+
+## Download
+由于没有信用卡,我不能把他发到Chrome商店,而且目前也只是个基本版,如果你想试一试,可以点击[这里](http://7xr09v.com1.z0.glb.clouddn.com/saveToGist.zip)下载.
